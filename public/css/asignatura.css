@@ -1,0 +1,757 @@
+#contenidoMatricula {
+    background: #fff;
+    width: 96%;
+    min-width: 1025px;
+    margin: 1% 2%;
+    float: left;
+    padding-bottom: 10px;
+}
+
+/* filtros de matricula */
+#seleccionMatricula {
+    float: left;
+    margin: 15px 2%;
+    width: 96%;
+}
+
+.parBandaAjustes {
+    width: 25%;
+    float: left;
+    font-size: 12px;
+}
+
+    .parBandaAjustes div {
+        width: 100%;
+    }
+
+.subBarra98 {
+    background: #ddd;
+    height: 2px;
+    width: 98%;
+    float: left;
+    margin-left: 2%;
+}
+
+.subBarra {
+    background: #ddd;
+    height: 2px;
+    width: 96%;
+    float: left;
+    margin: 2px 2%;
+}
+
+.subBarra100 {
+    background: #ddd;
+    width: 100%;
+    height: 2px;
+    float: left;
+}
+/* fin filtros de matricula */
+
+/* dash */
+/*.dashBoardNoticias {
+    background: #fff;
+    box-shadow: 0 3px 4px #AAAAAA;
+    float: left;
+    width: 100%;
+    height: 35px;
+    overflow: hidden;
+}*/
+
+.subDash4 {
+    float: left;
+    width: 25%;
+}
+
+.subDash3 {
+    float: left;
+    width: 33.3333%;
+}
+
+.dashBoardNoticias .subDash4:hover {
+    box-shadow: 0 3px 4px #AAAAAA;
+}
+/* dash */
+.dashBoardMatricula {
+    float: left;
+    width: 96%;
+    margin: 0 2%;
+    height: 40px;
+}
+
+.subDash1_3 {
+    float: left;
+    width: 75%;
+    box-shadow: 0 3px 4px #AAAAAA;
+    background: #f0f0f0;
+}
+
+.dashBoardMatricula .subDash3 {
+    border-right: 1px solid #DDDDDD;
+    line-height: 40px;
+    margin-left: -1px;
+}
+
+.subDash3 h3, .subDash3 p {
+    float: left;
+    margin-left: 10px;
+}
+
+/* contenedores de la oferta academica */
+#contenedorOferta {
+    width: 96%;
+    margin: 2px 2%;
+    float: left;
+    display: inline-block;
+    padding-top: 20px;
+}
+
+.disabled, .disabled *, .disabled:hover * {
+    color: #ddd !important;
+    box-shadow: none !important;
+    cursor: default !important;
+}
+
+#contenedorOferta .panelIzquierda {
+    float: left;
+    width: 25%;
+    height: 100%;
+}
+
+.content {
+    width: 100%;
+    float: left;
+}
+
+.shadowContent {
+    width: 100%;
+    float: left;
+    box-shadow: 0px 3px 4px #aaa;
+    margin-top: 10px;
+}
+
+.rowAsignatura {
+    width: 100%;
+    border-bottom: solid 2px #ddd;
+    float: left;
+    padding: 10px auto;
+    font-size: 12px;
+    cursor: pointer;
+    background: #ffffff;
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkZGRkZGQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top, #ffffff 0%, #dddddd 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#dddddd));
+    background: -webkit-linear-gradient(top, #ffffff 0%,#dddddd 100%);
+    background: -o-linear-gradient(top, #ffffff 0%,#dddddd 100%);
+    background: -ms-linear-gradient(top, #ffffff 0%,#dddddd 100%);
+    background: linear-gradient(to bottom, #ffffff 0%,#dddddd 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#dddddd',GradientType=0 );
+}
+
+.iconRowMatricula {
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.contentH3bloque {
+    margin-top: 10px;
+    width: 100%;
+    float: left;
+}
+
+    .contentH3bloque h3 {
+        margin-top: 10px;
+        margin-left: 15px !important;
+        width: 100%;
+        float: left;
+        font-size: 14px;
+    }
+
+.contentH4bloque {
+    width: 100%;
+    float: left;
+    background: #58ACD3;
+    height: 30px;
+}
+
+    .contentH4bloque h4 {
+        margin-left: 15px !important;
+        width: 100%;
+        float: left;
+        font-size: 12px;
+        color: #fff;
+        line-height: 30px;
+    }
+
+.selectedRow {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-color: #58ACD3;
+    box-shadow: 0 3px 4px #AAAAAA;
+    color: #58ACD3;
+    margin-bottom: 6px;
+    margin-left: 6px;
+}
+
+    .selectedRow *, .selectedRow:hover * {
+        color: #58ACD3;
+    }
+
+.iconRowAsignatura {
+    float: left;
+    width: 10%;
+    text-align: center;
+}
+
+    .iconRowAsignatura span {
+        line-height: 35px;
+    }
+
+.dscRowAsignatura {
+    float: left;
+    width: 75%;
+    margin: 10px auto 5px auto;
+}
+
+    .dscRowAsignatura span {
+        float: right;
+    }
+
+.crdRowAsignatura {
+    float: left;
+    width: 15%;
+}
+
+    .crdRowAsignatura p {
+        float: left;
+        line-height: 35px;
+    }
+
+    .crdRowAsignatura div {
+        float: right;
+        line-height: 35px;
+        margin-right: 5px;
+    }
+
+.dscRowAsignatura p {
+    margin-left: 5px;
+}
+
+.rowAsignatura:hover {
+    border-bottom-color: #58ACD3;
+    background: #ffffff;
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI2RkZGRkZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top, #ffffff 0%, #dddddd 50%, #ffffff 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#dddddd), color-stop(100%,#ffffff));
+    background: -webkit-linear-gradient(top, #ffffff 0%,#dddddd 50%,#ffffff 100%);
+    background: -o-linear-gradient(top, #ffffff 0%,#dddddd 50%,#ffffff 100%);
+    background: -ms-linear-gradient(top, #ffffff 0%,#dddddd 50%,#ffffff 100%);
+    background: linear-gradient(to bottom, #ffffff 0%,#dddddd 50%,#ffffff 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 );
+}
+
+#contenedorOferta .panelCentral {
+    float: left;
+    width: 75%;
+    height: 100%;
+}
+
+#contenedorOferta .panelDerecha {
+    float: left;
+    width: 0%;
+    height: 100%;
+}
+
+    #contenedorOferta .panelIzquierda h3, #contenedorOferta .panelCentral h3, #contenedorOferta .panelDerecha h3 {
+        margin: 2px 2%;
+    }
+
+/* fin contenedores de la oferta academica */
+
+/* GRID HORARIOS */
+.gridHorario {
+    margin-top: 10px;
+    width: 98%;
+    margin-left: 2%;
+    float: left;
+    box-shadow: 0px 3px 4px #aaa;
+    overflow: auto;
+}
+
+#contentHorarioPreMatricula {
+    display: table;
+    width: 100%;
+}
+
+    #contentHorarioPreMatricula .rowGridHorario {
+        display: table-row;
+    }
+
+.rowPar {
+    background: #fff;
+}
+
+.rowImpar {
+    background: #eee;
+}
+
+.rowGridHorario {
+    width: 100%;
+    float: left;
+    border-bottom: solid 1px #ddd;
+    font-size: 12px;
+}
+
+.rowGridHorarioHead {
+    width: 100%;
+    float:left;
+    height: 35px;
+    line-height: 35px;
+    background: #58ACD3;
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom: solid 2px #ddd;
+    overflow: hidden;
+    /*display: table;*/
+}
+
+    .rowGridHorarioHead > div {
+        display: table-cell;
+    }
+
+    .rowGridHorarioHead * {
+        border-color: #ddd !important;
+        color: #fff;
+    }
+
+.rowGridHorario * {
+    border-color: #ddd;
+    vertical-align: middle;
+}
+
+.leftGridHorario {
+    width: 40px;
+    text-align: center;
+    border-left: solid 1px #ddd;
+    margin-left: -1px;
+}
+
+#contentHorarioPreMatricula .leftGridHorario {
+    display: table-cell;
+}
+
+.leftGridEstado {
+    width: 40px;
+    height: 100%;
+    text-align: center;
+    border-left: solid 1px #ddd;
+    margin-left: -1px;
+}
+
+#contentHorarioPreMatricula .leftGridEstado {
+    height: 100%;
+    text-align: center;
+    border-left: solid 1px #ddd;
+    margin-left: -1px;
+    display: table-cell;
+}
+
+.rowGridHorario .leftGridHorario, .rowGridHorario .rigthGridHorario .icon-spinner {
+    line-height: 45px !important;
+}
+
+.linkedDiv {
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.centralGridHorario {
+    width: 120px;
+    border-left: solid 1px #ddd;
+    margin-left: -1px;
+    text-align: center;
+    height: 100%;
+}
+
+#contentHorarioPreMatricula .centralGridHorario {
+    display: table-cell;
+    height: 100%;
+}
+
+.rigthGridHorario {
+    width: 5%;
+    text-align: center;
+    float: right;
+}
+
+.gridHorario_v2 {
+    margin-top: 10px;
+    width: 98% !important;
+    margin-left: 2%;
+    float: left;
+    box-shadow: 0px 3px 4px #aaa;
+    overflow: auto;
+}
+/* FIN GRID HORARIOS*/
+
+/* SELECT */
+div.selectBox {
+    position: relative;
+    display: inline-block;
+    cursor: default;
+    text-align: left;
+    line-height: 30px;
+    clear: both;
+    color: #fff;
+}
+
+span.selected {
+    width: 167px;
+    text-indent: 20px;
+    border: 1px solid #ccc;
+    border-right: none;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    background: #fff;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+span.selectArrow {
+    height: 27px !important;
+    padding-top: 3px;
+    width: 30px;
+    border: 1px solid #ddd;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    text-align: center;
+    font-size: 20px;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    background: #58ACD3;
+    cursor: pointer;
+}
+
+span.selectArrow, span.selected {
+    position: relative;
+    float: left;
+    height: 30px;
+    z-index: 1;
+}
+
+div.selectOptions {
+    position: absolute;
+    top: 28px;
+    left: 0;
+    width: 198px;
+    border: 1px solid #ccc;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    overflow: auto;
+    background: #f6f6f6;
+    display: none;
+    z-index: 1;
+    cursor: pointer;
+    box-shadow: 0 3px 4px #AAAAAA;
+    max-height: 150px;
+}
+
+span.selectOption {
+    display: block;
+    width: 80%;
+    line-height: 20px;
+    padding: 5px 10%;
+    border-top: solid 2px #ddd;
+    cursor: pointer;
+}
+
+    span.selectOption:hover {
+        border-color: #58ACD3;
+        color: #58ACD3;
+    }
+
+span.selectArrow, span.selected {
+    position: relative;
+    float: left;
+    height: 30px;
+    z-index: 1;
+    background: #FFFFFF;
+}
+
+/* botones */
+.btnGrandeMatricula {
+    width: 120px;
+    height: 40px;
+    border-bottom: solid 2px #ddd;
+    margin: 0 10px;
+    float: right;
+    padding-left: 15px;
+}
+
+    .btnGrandeMatricula:hover {
+        border-color: #58ACD3;
+        box-shadow: 0 3px 4px #AAAAAA;
+        cursor: pointer;
+    }
+
+        .btnGrandeMatricula:hover * {
+            color: #58ACD3;
+        }
+
+.iconBtnGrandeMatricula {
+    width: 30px;
+    font-size: 22px;
+    line-height: 40px;
+    height: 40px;
+    float: left;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+.txtBtnGrandeMatricula {
+    line-height: 40px;
+    width: 75px;
+    height: 40px;
+    float: left;
+}
+/* fin botones */
+
+
+/* iconos */
+.icon-info-sign {
+    cursor: help;
+}
+
+/* RESUMEN */
+#dialogResumenMat {
+    border-top: solid 1px #58ACD3 !important;
+    min-height: auto !important;
+}
+
+#contentResumen {
+    width: 96%;
+    margin: 15px 2%;
+    float: left;
+}
+
+.rowResumen {
+    width: 100%;
+    border-bottom: solid 0px #ddd;
+    margin-bottom: -1px;
+    float: left;
+}
+
+    .rowResumen.rowHead, .rowResumen.rowHead * {
+        background: #58ACD3;
+        color: #fff;
+        border-color: #fff !important;
+    }
+
+.rowHead .infoDiasResumen {
+    line-height: 45px;
+    text-align: center;
+}
+
+.rowResumen .rowPar {
+    background: #fff;
+}
+
+.rowResumen .rowImpar {
+    background: #eee;
+}
+
+.rowResumen .grupoResumen {
+    width: 5.5%;
+    height: 100%;
+    line-height: 50px;
+    text-align: center;
+    float: left;
+}
+
+.rowResumen .infoResumen {
+    border-left: 1px solid #ddd;
+    float: left;
+    height: 50px;
+    margin-left: -1px;
+    width: 35%;
+}
+
+.rowResumen .dscResumen {
+    float: left;
+    height: 45px;
+    line-height: 45px;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+}
+
+.rowResumen .sedeResumen {
+   border-left: 1px solid #ddd;
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    overflow: hidden;
+    text-align: center;
+    width: 17%;
+}
+
+.rowResumen .infoDiasResumen {
+    border-left: 1px solid #ddd;
+    float: left;
+    margin-left: -1px;
+    height: 50px;
+    overflow: hidden;
+    padding-left: 1%;
+    width: 24%;
+    text-align:center;
+}
+
+    .rowResumen .infoDiasResumen .titDiaResumen {
+        font-weight: bold;
+        padding-top: 7px;
+    }
+
+.rowResumen .creditosResumen {
+    border-left: 1px solid #ddd;
+    float: left;
+    height: 100%;
+    line-height: 50px;
+    margin-left: -1px;
+    text-align: center;
+    width: 7%;
+}
+
+.rowResumen .stsResumen {
+    border-left: 1px solid #ddd;
+    float: left;
+    height: 100%;
+    line-height: 50px;
+    margin-left: -1px;
+    text-align: center;
+    width: 10%;
+}
+
+.btnGrandeMain {
+    height: 40px;
+    border-bottom: solid 2px #ddd;
+    margin: 0 10px;
+    float: right;
+    padding: 0 15px;
+}
+
+.mensajealert {
+    float: left;
+    font-size: 13px;
+    height: auto;
+    width: 350px;
+    padding-top: 15px;
+    text-align: center;
+}
+
+
+#iconalert, .iconalert {
+    color: #53acd3;
+    float: left;
+    font-size: 50px;
+    height: 50px;
+    line-height: 50px;
+    margin-left: 20px;
+    width: 80px;
+    padding-top: 15px;
+}
+
+.iconBtnGrandeMain {
+    width: 30px;
+    font-size: 22px;
+    line-height: 40px;
+    height: 40px;
+    float: left;
+    padding-top: 10px;
+}
+
+.txtBtnGrandeMain {
+    line-height: 40px;
+    height: 40px;
+    float: left;
+}
+
+#alerts, #dialogCerrar {
+    border-top: solid 1px #53acd3 !important;
+}
+
+.btnGrandeMain:hover {
+    border-color: #53acd3;
+    box-shadow: 0 3px 4px #AAAAAA;
+    cursor: pointer;
+}
+
+    .btnGrandeMain:hover * {
+        color: #53acd3;
+    }
+
+.rowVacio {
+    /*border-bottom: 3px solid #DDDDDD;*/
+    float: left;
+    margin-bottom: -1px;
+    width: 100%;
+}
+
+.addGrupoVacio {
+    float: left;
+    line-height: 35px;
+    text-align: center;
+    width: 5.5%;
+}
+
+.addInfoVacio {
+    border-left: 1px solid #DDDDDD;
+    float: left;
+    line-height: 35px;
+    margin-left: -1px;
+    padding-left: 1%;
+    width: 34%;
+}
+
+.addSedeVacio {
+    border-left: 1px solid #DDDDDD;
+    float: left;
+    line-height: 35px;
+    text-align: center;
+    width: 17%;
+}
+
+.addDayToSchedule {
+    border-left: 1px solid #DDDDDD;
+    float: left;
+    margin-left: -1px;
+    min-height: 35px;
+    overflow: hidden;
+    padding-left: 1%;
+    width: 24%;
+    text-align:center;
+}
+    .addDayToSchedule .titDiaResumen {
+        font-weight:bold;
+    }
+
+
+.addCreditoVacio {
+    border-left: 1px solid #DDDDDD;
+    float: left;
+    line-height: 35px;
+    margin-left: -1px;
+    text-align: center;
+    width: 7%;
+}
+
+.addStsVacio {
+    border-left: 1px solid #DDDDDD;
+    float: left;
+    line-height: 35px;
+    margin-left: -1px;
+    text-align: center;
+    width: 10%;
+}
