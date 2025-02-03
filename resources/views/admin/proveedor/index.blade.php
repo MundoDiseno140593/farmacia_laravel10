@@ -62,9 +62,19 @@
                                     <td>{{ $proveedor->correo }}</td>
                                     <td>{{ $proveedor->direccion }}</td>
                                     <td>
-                                        <img src="{{ asset($proveedor->avatar ?? 'img/proveedor.png') }}"
-                                            class=" img-fluid img-circle" style="width: 40px; cursor: none;">
+                                        @php
+                                            $rutaImagen = public_path($proveedor->avatar);
+                                        @endphp
+
+                                        @if (file_exists($rutaImagen) && !is_dir($rutaImagen))
+                                            <img src="{{ asset($proveedor->avatar) }}" class="img-fluid img-circle"
+                                                style="width: 40px; cursor: none;">
+                                        @else
+                                            <img src="{{ asset('img/proveedor.png') }}" class="img-fluid img-circle"
+                                                style="width: 40px; cursor: none;">
+                                        @endif
                                     </td>
+
                                     <td>
                                         @if ($proveedor->estado == 'Activo')
                                             <span class="badge bg-success">Activo</span>
@@ -81,7 +91,8 @@
                                         </button>
 
                                         <button class="editar-prov btn btn-sm btn-success" type="button"
-                                            data-toggle="modal" data-target="#crear_proveedor">
+                                            data-id="{{ $proveedor->id }}" data-toggle="modal"
+                                            data-target="#modalEditarproveedor">
                                             <i class="fas fa-pencil-alt"></i>
                                         </button>
 
@@ -180,6 +191,56 @@
         </div>
     </div>
 
+    <!-- Modal editar proveedor -->
+    <div class="modal fade" id="modalEditarproveedor">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="card card-success">
+                    <div class="card-header">
+                        <h3 class="card-title">Editar Proveedor</h3>
+                        <button data-dismiss="modal" aria-label="close" class="close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('crear_proveedor') }}" method="POST">
+                            @csrf
+
+                            <div class="form-group">
+                                <label for="nombre">Nombres:</label>
+                                <input id="nombre_edit" name="nombre_edit" type="text" class="form-control"
+                                    placeholder="Ingrese Nombre" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="telefono">Telefono:</label>
+                                <input id="telefono_edit" name="telefono_edit" type="number" class="form-control"
+                                    placeholder="Ingrese Telefono" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="correo">Correo</label>
+                                <input id="correo_edit" name="correo_edit" type="email" class="form-control"
+                                    placeholder="Ingrese Correo">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="direccion">Direccion:</label>
+                                <input id="direccion_edit" name="direccion_edit" type="text" class="form-control"
+                                    placeholder="Ingrese Direccion" required>
+                            </div>
+                            <input type="hidden" name="id_edit_prov" id="id_edit_prov">
+
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn bg-gradient-primary float-right m-1 w-100">Guardar</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 @endsection
@@ -217,12 +278,26 @@
                 var avatar = $(this).data('avatar');
 
                 // Si el proveedor ya tiene foto, mostrarla; si no, usar la default
-                $('#logoactual').attr('src', avatar || "{{ asset('img/proveedor.png') }}");  
+                $('#logoactual').attr('src', avatar || "{{ asset('img/proveedor.png') }}");
                 $('#nombre_logo').html(nombre);
                 $('#id-logo-prov').val(id);
 
                 $('#cambiologo').modal('show');
             });
+
+            $('#proveedoresTable').on('click', '.editar-prov', function() {
+                var id = $(this).data('id');
+                $('#id_edit_prov').val(id);
+                var url = "{{ route('extraer_datos', ['id' => ':id']) }}";
+                url = url.replace(':id', id);
+
+                $.ajax({
+                    type: "GET", // Método HTTP: POST
+                    url: url, // URL del endpoint para crear el producto
+                    processData: false, // No procesamos los datos (es necesario cuando usamos FormData)
+                    contentType: false, // No definimos el tipo de contenido (también por el uso de FormData)
+                })
+            })
 
         });
     </script>

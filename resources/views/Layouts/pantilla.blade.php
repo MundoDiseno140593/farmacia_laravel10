@@ -158,7 +158,7 @@
                             </ul>
                         </li>
                         <li class="nav-item ">
-                            <a href="#" class="nav-link" style="background: rgb(24, 21, 21)">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
                                     Usuarios
@@ -187,16 +187,16 @@
 
 
                         <li class="nav-item ">
-                            <a href="{{ route('vistaAtributos') }}" class="nav-link" style="background: rgb(24, 21, 21)">
+                            <a href="{{ route('vistaAtributos') }}" class="nav-link" >
                                 <i class="nav-icon fas fa-vials"></i>
                                 <p>
                                     Atributos
                                 </p>
                             </a>
                         </li>
-                        <li class="animate__animated animate__jackInTheBox nav-header">Almacen</li> 
+                        <li class="animate__animated animate__jackInTheBox nav-header">Almacen</li>
                         <li class="nav-item ">
-                            <a href="#" class="nav-link" style="background: rgb(24, 21, 21)">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tablets"></i>
                                 <p>
                                     Productos
@@ -218,7 +218,7 @@
 
                         <li class="nav-header">Compra</li>
                         <li class="nav-item ">
-                            <a href="#" class="nav-link" style="background: rgb(24, 21, 21)">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-truck-loading"></i>
                                 <p>
                                     Proveedores
