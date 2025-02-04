@@ -82,5 +82,43 @@ class ProveedorController extends Controller
         return redirect()->back()->with('success', 'Foto actualizada correctamente');
     }
 
-    
+    public function extraerDatos($id)
+    {
+        $proveedor = Proveedor::find($id);
+
+        if ($proveedor) {
+            return response()->json([
+                'success' => true,
+                'data' => $proveedor
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Proveedor no encontrado'
+            ], 404);
+        }
+    }
+
+    public function actualizar(Request $request)
+    {
+        $request->validate([
+            'id_edit_prov' => 'required|exists:proveedors,id',
+            'nombre' => 'required|string|max:255',
+            'telefono' => 'required|numeric',
+            'correo' => 'nullable|email|max:255',
+            'direccion' => 'required|string|max:255',
+        ]);
+
+        $proveedor = Proveedor::findOrFail($request->id_edit_prov);
+        $proveedor->nombre = $request->nombre;
+        $proveedor->telefono = $request->telefono;
+        $proveedor->correo = $request->correo;
+        $proveedor->direccion = $request->direccion;
+        $proveedor->save();
+
+        return redirect()->back()->with('success', 'Proveedor actualizado correctamente.');
+    }
+
+
+
 }

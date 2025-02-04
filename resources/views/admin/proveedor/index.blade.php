@@ -203,7 +203,7 @@
                         </button>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('crear_proveedor') }}" method="POST">
+                        <form action="{{ route('actualizar_proveedor') }}" method="POST">
                             @csrf
 
                             <div class="form-group">
@@ -288,16 +288,36 @@
             $('#proveedoresTable').on('click', '.editar-prov', function() {
                 var id = $(this).data('id');
                 $('#id_edit_prov').val(id);
+
                 var url = "{{ route('extraer_datos', ['id' => ':id']) }}";
                 url = url.replace(':id', id);
 
                 $.ajax({
-                    type: "GET", // Método HTTP: POST
-                    url: url, // URL del endpoint para crear el producto
-                    processData: false, // No procesamos los datos (es necesario cuando usamos FormData)
-                    contentType: false, // No definimos el tipo de contenido (también por el uso de FormData)
-                })
-            })
+                    type: "GET",
+                    url: url,
+                    dataType: "json", // Aseguramos que la respuesta sea JSON
+                    success: function(response) {
+                        console.log(response)
+                        if (response.success) {
+                            var proveedor = response.data;
+
+                            // Llenar los campos del modal con los datos obtenidos
+                            $('#nombre_edit').val(proveedor.nombre);
+                            $('#correo_edit').val(proveedor.correo);
+                            $('#telefono_edit').val(proveedor.telefono);
+                            $('#direccion_edit').val(proveedor.direccion);
+                            // Mostrar el modal
+                            $('#modalEditarproveedor').modal('show');
+                        } else {
+                            alert("No se encontraron datos del proveedor.");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error en la petición AJAX:", error);
+                    }
+                });
+            });
+
 
         });
     </script>
