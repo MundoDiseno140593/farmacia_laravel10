@@ -1,5 +1,5 @@
 @extends('Layouts.pantilla')
-@section('title', 'Porveedor | Inevt')
+@section('title', 'Cliente | Inevt')
 @section('css')
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,9 +13,9 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h4> <i class="fas fa-truck-moving"> Proveedores</i>
+                    <h4> <i class="fas fa-user-shield"> Clientes</i>
                         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalcreaproveedor">
-                            Nuevo Proveedor
+                            Nuevo cliente
                         </button>
                     </h4>
                 </div>
@@ -54,54 +54,7 @@
                             @php
                                 $contador = 1;
                             @endphp
-                            @foreach ($proveedores as $proveedor)
-                                <tr>
-                                    <td>{{ $contador++ }}</td>
-                                    <td>{{ $proveedor->nombre }}</td>
-                                    <td style="text-align: center">{{ $proveedor->telefono }}</td>
-                                    <td>{{ $proveedor->correo }}</td>
-                                    <td>{{ $proveedor->direccion }}</td>
-                                    <td>
-                                        @php
-                                            $rutaImagen = public_path($proveedor->avatar);
-                                        @endphp
 
-                                        @if (file_exists($rutaImagen) && !is_dir($rutaImagen))
-                                            <img src="{{ asset($proveedor->avatar) }}" class="img-fluid img-circle"
-                                                style="width: 40px; cursor: none;">
-                                        @else
-                                            <img src="{{ asset('img/proveedor.png') }}" class="img-fluid img-circle"
-                                                style="width: 40px; cursor: none;">
-                                        @endif
-                                    </td>
-
-                                    <td>
-                                        @if ($proveedor->estado == 'Activo')
-                                            <span class="badge bg-success">Activo</span>
-                                        @else
-                                            <span class="badge bg-danger">Inactivo</span>
-                                        @endif
-                                    </td>
-
-                                    <td>
-                                        <button type="button" class="avatar btn btn-sm btn-info"
-                                            data-id="{{ $proveedor->id }}" data-nombre="{{ $proveedor->nombre }}"
-                                            data-avatar="{{ asset($proveedor->avatar ?? 'img/proveedor.png') }}">
-                                            <i class="fas fa-image"></i>
-                                        </button>
-
-                                        <button class="editar-prov btn btn-sm btn-success" type="button"
-                                            data-id="{{ $proveedor->id }}" data-toggle="modal"
-                                            data-target="#modalEditarproveedor">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </button>
-
-                                        <button class="borrar btn btn-sm btn-danger"  data-id="{{ $proveedor->id }}" data-nombre="{{ $proveedor->nombre }}">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -111,11 +64,11 @@
 
     <!-- Modal crear proveedor -->
     <div class="modal fade" id="modalcreaproveedor">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="card card-success">
                     <div class="card-header">
-                        <h3 class="card-title">Craer Proveedor</h3>
+                        <h3 class="card-title">Crear Clientes</h3>
                         <button data-bs-dismiss="modal" aria-label="close" class="close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -123,35 +76,86 @@
                     <div class="card-body">
                         <form action="{{ route('crear_proveedor') }}" method="POST">
                             @csrf
-
-                            <div class="form-group">
-                                <label for="nombre">Nombres:</label>
-                                <input id="nombre" name="nombre" type="text" class="form-control"
-                                    placeholder="Ingrese Nombre" required>
+                            <div class="row">
+                                <!-- Columna 1 -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="nombre">Nombres:</label>
+                                        <input id="nombre" type="text" class="form-control" placeholder="Ingrese Nombre" required>
+                                    </div>
+                                </div>
+                                <!-- Columna 2 -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="apellidos">Apellidos:</label>
+                                        <input id="apellidos" type="text" class="form-control" placeholder="Ingrese Apellidos" required>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="telefono">Telefono:</label>
-                                <input id="telefono" name="telefono" type="number" class="form-control"
-                                    placeholder="Ingrese Telefono" required>
+                            <div class="row">
+                                <!-- Columna 1 -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="dni">DNI:</label>
+                                        <input id="dni" type="text" class="form-control" placeholder="Ingrese DNI">
+                                    </div>
+                                </div>
+                                <!-- Columna 2 -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="edad">Nacimiento:</label>
+                                        <input id="edad" type="date" class="form-control" placeholder="Ingrese Fecha De Nacimiento" required>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="correo">Correo</label>
-                                <input id="correo" name="correo" type="email" class="form-control"
-                                    placeholder="Ingrese Correo">
+                            <div class="row">
+                                <!-- Columna 1 -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="telefono">Telefono:</label>
+                                        <input id="telefono" type="number" class="form-control" placeholder="Ingrese Telefono">
+                                    </div>
+                                </div>
+                                <!-- Columna 2 -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="correo">Correo</label>
+                                        <input id="correo" type="email" class="form-control" placeholder="Ingrese Correo">
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="direccion">Direccion:</label>
-                                <input id="direccion" name="direccion" type="text" class="form-control"
-                                    placeholder="Ingrese Direccion" required>
+                            <div class="row">
+                                <!-- Columna 1 -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="sexo">Sexo:</label>
+                                        <select name="id_sexo" id="id_sexo" class="form-control select2" style="width: 100%">
+                                            <option value="">Seleccionar</option>
+                                            @foreach ($sexo as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Columna 2 -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="adicional">Direccion:</label>
+                                        <textarea name="direccion" id="direccion" class="form-control" placeholder="Ingrese su direccion">
+
+                                        </textarea>
+                                    </div>
+                                </div>
                             </div>
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn bg-gradient-primary float-right m-1 w-100">Guardar</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn bg-gradient-primary float-right m-1 w-100">Guardar</button>
-                    </div>
-                    </form>
                 </div>
             </div>
         </div>

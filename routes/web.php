@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AtributoController;
+use App\Http\Controllers\Backend\ClienteController;
 use App\Http\Controllers\Backend\ProductoController;
 use App\Http\Controllers\Backend\ProveedorController;
 use App\Http\Controllers\Backend\UsuarioController;
@@ -89,7 +90,17 @@ Route::prefix('proveedor')->group(function () {
     Route::post('/cambiar_foto_proveedor', [ProveedorController::class, 'cambiar_foto_proveedor'])->name('cambiar_foto_proveedor');
     Route::get('/proveedor/{id}', [ProveedorController::class, 'extraerDatos'])->name('extraer_datos');
     Route::put('/proveedor/actualizar', [ProveedorController::class, 'actualizar'])->name('actualizar_proveedor');
+    Route::post('/proveedor/eliminar_proveedor/{id}', [ProveedorController::class, 'eliminar_proveedor'])->name('eliminar_proveedor');
+});
 
+
+Route::prefix('cliente')->group(function () {
+    Route::get('/cliente', [ClienteController::class, 'listaCliente'])->name('listaCliente');
+    Route::post('/crear_proveedor', [ProveedorController::class, 'crear_proveedor'])->name('crear_proveedor');
+    Route::post('/cambiar_foto_proveedor', [ProveedorController::class, 'cambiar_foto_proveedor'])->name('cambiar_foto_proveedor');
+    Route::get('/proveedor/{id}', [ProveedorController::class, 'extraerDatos'])->name('extraer_datos');
+    Route::put('/proveedor/actualizar', [ProveedorController::class, 'actualizar'])->name('actualizar_proveedor');
+    Route::post('/proveedor/eliminar_proveedor/{id}', [ProveedorController::class, 'eliminar_proveedor'])->name('eliminar_proveedor');
 });
 
 

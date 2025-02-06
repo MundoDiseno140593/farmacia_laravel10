@@ -157,11 +157,12 @@
                             <ul class="nav nav-treeview">
                             </ul>
                         </li>
+
                         <li class="nav-item ">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
-                                    Usuarios
+                                    Gestion Usuarios
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -185,15 +186,27 @@
 
                         </li>
 
-
                         <li class="nav-item ">
-                            <a href="{{ route('vistaAtributos') }}" class="nav-link" >
-                                <i class="nav-icon fas fa-vials"></i>
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-user-tie"></i>
                                 <p>
-                                    Atributos
+                                    Clientes
+                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
+
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('listaCliente') }}" class="nav-link">
+                                        <i class="fas fa-address-card nav-icon"></i>
+                                        <p>Gestion clientes</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+
                         </li>
+
                         <li class="animate__animated animate__jackInTheBox nav-header">Almacen</li>
                         <li class="nav-item ">
                             <a href="#" class="nav-link">
@@ -213,6 +226,15 @@
                                 </li>
                             </ul>
 
+                        </li>
+
+                        <li class="nav-item ">
+                            <a href="{{ route('vistaAtributos') }}" class="nav-link" >
+                                <i class="nav-icon fas fa-vials"></i>
+                                <p>
+                                    Atributos
+                                </p>
+                            </a>
                         </li>
 
 

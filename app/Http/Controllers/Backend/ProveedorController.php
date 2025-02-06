@@ -102,23 +102,41 @@ class ProveedorController extends Controller
     public function actualizar(Request $request)
     {
         $request->validate([
-            'id_edit_prov' => 'required|exists:proveedors,id',
-            'nombre' => 'required|string|max:255',
-            'telefono' => 'required|numeric',
-            'correo' => 'nullable|email|max:255',
-            'direccion' => 'required|string|max:255',
+            'id_edit_prov' => 'required',
+            'nombre_edit' => 'required|string|max:255',
+            'telefono_edit' => 'required|numeric',
+            'correo_edit' => 'nullable|email|max:255',
+            'direccion_edit' => 'required|string|max:255',
         ]);
 
         $proveedor = Proveedor::findOrFail($request->id_edit_prov);
-        $proveedor->nombre = $request->nombre;
-        $proveedor->telefono = $request->telefono;
-        $proveedor->correo = $request->correo;
-        $proveedor->direccion = $request->direccion;
+        $proveedor->nombre = $request->nombre_edit;
+        $proveedor->telefono = $request->telefono_edit;
+        $proveedor->correo = $request->correo_edit;
+        $proveedor->direccion = $request->direccion_edit;
         $proveedor->save();
 
         return redirect()->back()->with('success', 'Proveedor actualizado correctamente.');
     }
 
+    public function eliminar_proveedor($id)
+    {
+        try {
+            $proveedor = Proveedor::findOrFail($id);
+            $proveedor->estado = 'Inactivo';  // Cambia el valor de estado, puede ser 'activo' o 'inactivo'
+            $proveedor->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Proveedor marcado como inactivo correctamente.'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al marcar el proveedor como inactivo.'
+            ]);
+        }
+    }
 
 
 }
