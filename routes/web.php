@@ -96,7 +96,7 @@ Route::prefix('proveedor')->group(function () {
 
 Route::prefix('cliente')->group(function () {
     Route::get('/cliente', [ClienteController::class, 'listaCliente'])->name('listaCliente');
-    Route::post('/crear_proveedor', [ProveedorController::class, 'crear_proveedor'])->name('crear_proveedor');
+    Route::post('/crear_cliente', [ClienteController::class, 'crear_cliente'])->name('crear_cliente');
     Route::post('/cambiar_foto_proveedor', [ProveedorController::class, 'cambiar_foto_proveedor'])->name('cambiar_foto_proveedor');
     Route::get('/proveedor/{id}', [ProveedorController::class, 'extraerDatos'])->name('extraer_datos');
     Route::put('/proveedor/actualizar', [ProveedorController::class, 'actualizar'])->name('actualizar_proveedor');

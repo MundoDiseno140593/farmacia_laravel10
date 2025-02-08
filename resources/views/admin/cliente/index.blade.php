@@ -14,7 +14,7 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h4> <i class="fas fa-user-shield"> Clientes</i>
-                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalcreaproveedor">
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalcreacli">
                             Nuevo cliente
                         </button>
                     </h4>
@@ -37,14 +37,14 @@
                 </div>
 
                 <div class="card-body">
-                    <table id="proveedoresTable" class="table table-hover">
+                    <table id="cliesTable" class="table table-hover">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Nombre</th>
                                 <th style="text-align: center">Teléfono</th>
-                                <th>Correo</th>
-                                <th>Direccion</th>
+                                <th>DNI</th>
+                                <th  style="text-align: center">Fecha Nacimiento</th>
                                 <th>Foto</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
@@ -55,6 +55,56 @@
                                 $contador = 1;
                             @endphp
 
+                            @foreach ($cliente as $cli)
+                            <tr>
+                                <td>{{ $contador++ }}</td>
+                                <td>{{ $cli->nombre }} {{ $cli->apellidos }}</td>
+                                <td style="text-align: center">{{ $cli->telefono }}</td>
+                                <td  style="text-align: center">{{ $cli->dni }}</td>
+                                <td  style="text-align: center">{{ $cli->edad }}</td>
+                                <td>
+                                    @php
+                                        $rutaImagen = public_path($cli->avatar);
+                                    @endphp
+
+                                    @if (file_exists($rutaImagen) && !is_dir($rutaImagen))
+                                        <img src="{{ asset($cli->avatar) }}" class="img-fluid img-circle"
+                                            style="width: 40px; cursor: none;">
+                                    @else
+                                        <img src="{{ asset('img/proveedor.png') }}" class="img-fluid img-circle"
+                                            style="width: 40px; cursor: none;">
+                                    @endif
+                                </td>
+
+                                <td>
+                                    @if ($cli->estado == 'Activo')
+                                        <span class="badge bg-success">Activo</span>
+                                    @else
+                                        <span class="badge bg-danger">Inactivo</span>
+                                    @endif
+                                </td>
+
+                                <td>
+                                    <button type="button" class="avatar btn btn-sm btn-info"
+                                        data-id="{{ $cli->id }}" data-nombre="{{ $cli->nombre }}"
+                                        data-avatar="{{ asset($cli->avatar ?? 'img/cli.png') }}">
+                                        <i class="fas fa-image"></i>
+                                    </button>
+
+                                    <button class="editar-prov btn btn-sm btn-success" type="button"
+                                        data-id="{{ $cli->id }}" data-toggle="modal"
+                                        data-target="#modalEditarcli">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </button>
+
+                                    <button class="borrar btn btn-sm btn-danger"  data-id="{{ $cli->id }}" data-nombre="{{ $cli->nombre }}">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
+
+
                         </tbody>
                     </table>
                 </div>
@@ -62,8 +112,8 @@
         </div>
     </section>
 
-    <!-- Modal crear proveedor -->
-    <div class="modal fade" id="modalcreaproveedor">
+    <!-- Modal crear cli -->
+    <div class="modal fade" id="modalcreacli">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="card card-success">
@@ -74,21 +124,23 @@
                         </button>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('crear_proveedor') }}" method="POST">
+                        <form action="{{ route('crear_cliente') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <!-- Columna 1 -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="nombre">Nombres:</label>
-                                        <input id="nombre" type="text" class="form-control" placeholder="Ingrese Nombre" required>
+                                        <input id="nombre" name="nombre" type="text" class="form-control"
+                                            placeholder="Ingrese Nombre" required>
                                     </div>
                                 </div>
                                 <!-- Columna 2 -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="apellidos">Apellidos:</label>
-                                        <input id="apellidos" type="text" class="form-control" placeholder="Ingrese Apellidos" required>
+                                        <input id="apellidos" name="apellidos" type="text" class="form-control"
+                                            placeholder="Ingrese Apellidos" required>
                                     </div>
                                 </div>
                             </div>
@@ -98,14 +150,16 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="dni">DNI:</label>
-                                        <input id="dni" type="text" class="form-control" placeholder="Ingrese DNI">
+                                        <input id="dni" name="dni" type="number" class="form-control"
+                                            placeholder="Ingrese DNI">
                                     </div>
                                 </div>
                                 <!-- Columna 2 -->
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="edad">Nacimiento:</label>
-                                        <input id="edad" type="date" class="form-control" placeholder="Ingrese Fecha De Nacimiento" required>
+                                        <label for="f_nac">Nacimiento:</label>
+                                        <input id="f_nac" name="f_nac" type="date" class="form-control"
+                                            placeholder="Ingrese Fecha De Nacimiento" required>
                                     </div>
                                 </div>
                             </div>
@@ -115,14 +169,16 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="telefono">Telefono:</label>
-                                        <input id="telefono" type="number" class="form-control" placeholder="Ingrese Telefono">
+                                        <input id="telefono" name="telefono" type="number" class="form-control"
+                                            placeholder="Ingrese Telefono">
                                     </div>
                                 </div>
                                 <!-- Columna 2 -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="correo">Correo</label>
-                                        <input id="correo" type="email" class="form-control" placeholder="Ingrese Correo">
+                                        <input id="correo" name="correo" type="email" class="form-control"
+                                            placeholder="Ingrese Correo">
                                     </div>
                                 </div>
                             </div>
@@ -132,10 +188,11 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="sexo">Sexo:</label>
-                                        <select name="id_sexo" id="id_sexo" class="form-control select2" style="width: 100%">
+                                        <select name="id_sexo" id="id_sexo" class="form-control select2"
+                                            style="width: 100%">
                                             <option value="">Seleccionar</option>
                                             @foreach ($sexo as $item)
-                                            <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                                <option value="{{ $item->id }}">{{ $item->nombre }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -152,7 +209,8 @@
                             </div>
 
                             <div class="card-footer">
-                                <button type="submit" class="btn bg-gradient-primary float-right m-1 w-100">Guardar</button>
+                                <button type="submit"
+                                    class="btn bg-gradient-primary float-right m-1 w-100">Guardar</button>
                             </div>
                         </form>
                     </div>
@@ -166,18 +224,18 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h5 class="modal-title">Cambiar Foto De Proveedor</h5>
+                    <h5 class="modal-title">Cambiar Foto De cli</h5>
                 </div>
                 <div class="modal-body">
                     <div class="text-center">
-                        <img id='logoactual' src="{{ asset('img/proveedor.png') }}"
+                        <img id='logoactual' src="{{ asset('img/cli.png') }}"
                             class="profile-user-img img-fluid img-circle">
                     </div>
                     <div class="text-center">
                         <b id="nombre_logo"></b>
                     </div>
 
-                    <form action="{{ route('cambiar_foto_proveedor') }}" method="POST" enctype="multipart/form-data">
+                    <form action="" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="input-group mb-3 ml-5 mt-2">
                             <!-- SE AGREGA ID AL INPUT -->
@@ -195,19 +253,19 @@
         </div>
     </div>
 
-    <!-- Modal editar proveedor -->
-    <div class="modal fade" id="modalEditarproveedor">
+    <!-- Modal editar cli -->
+    <div class="modal fade" id="modalEditarcli">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="card card-success">
                     <div class="card-header">
-                        <h3 class="card-title">Editar Proveedor</h3>
+                        <h3 class="card-title">Editar cli</h3>
                         <button data-dismiss="modal" aria-label="close" class="close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('actualizar_proveedor') }}" method="POST">
+                        <form action="" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
@@ -257,117 +315,16 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.datatables.net/v/dt/dt-2.1.3/datatables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    @if ($errors->any())
     <script>
-        // Esperamos a que el documento esté listo antes de ejecutar el código.
-        $(document).ready(function() {
-            $('.select2').select2();
-            $('#proveedoresTable').DataTable();
-
-            // Detectar cambio en input file y mostrar la imagen seleccionada
-            $('#photo').change(function(event) {
-                var file = event.target.files[0]; // Obtener archivo
-                if (file) {
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        $('#logoactual').attr('src', e.target.result); // Mostrar en modal
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    console.warn("No se seleccionó ningún archivo.");
-                }
-            });
-
-            $('#proveedoresTable').on('click', '.avatar', function(e) {
-                var id = $(this).data('id');
-                var nombre = $(this).data('nombre');
-                var avatar = $(this).data('avatar');
-
-                // Si el proveedor ya tiene foto, mostrarla; si no, usar la default
-                $('#logoactual').attr('src', avatar || "{{ asset('img/proveedor.png') }}");
-                $('#nombre_logo').html(nombre);
-                $('#id-logo-prov').val(id);
-
-                $('#cambiologo').modal('show');
-            });
-
-            $('#proveedoresTable').on('click', '.editar-prov', function() {
-                var id = $(this).data('id');
-                $('#id_edit_prov').val(id);
-
-                var url = "{{ route('extraer_datos', ['id' => ':id']) }}";
-                url = url.replace(':id', id);
-
-                $.ajax({
-                    type: "GET",
-                    url: url,
-                    dataType: "json", // Aseguramos que la respuesta sea JSON
-                    success: function(response) {
-                        console.log(response)
-                        if (response.success) {
-                            var proveedor = response.data;
-                            // Llenar los campos del modal con los datos obtenidos
-                            $('#nombre_edit').val(proveedor.nombre);
-                            $('#correo_edit').val(proveedor.correo);
-                            $('#telefono_edit').val(proveedor.telefono);
-                            $('#direccion_edit').val(proveedor.direccion);
-                            // Mostrar el modal
-                            $('#modalEditarproveedor').modal('hide');
-                        } else {
-                            alert("No se encontraron datos del proveedor.");
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("Error en la petición AJAX:", error);
-                    }
-                });
-            });
-
-
-            $('#proveedoresTable').on('click','.borrar', function(){
-                var id = $(this).data('id');
-                var nombre = $(this).data('nombre');
-
-                var url = "{{ route('eliminar_proveedor',['id'=>':id']) }}";
-                url = url.replace(':id', id);
-
-                Swal.fire({
-                    title: "¿Estás seguro?",
-                    text: "Se eliminará el proveedor: " + nombre,
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#d33",
-                    cancelButtonColor: "#3085d6",
-                    confirmButtonText: "Sí, eliminar",
-                    cancelButtonText: "Cancelar"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url: url,
-                            type: "POST",
-                            data: {
-                                _token: "{{ csrf_token() }}",
-                            },
-                            success: function(response) {
-                                if (response.success) {
-                                    Swal.fire("¡Inactivado!", response.message, "success")
-                                        .then(() => {
-                                            location.reload(); // Recargar la página o actualizar la tabla
-                                        });
-                                } else {
-                                    Swal.fire("Error", response.message, "error");
-                                }
-                            },
-                            error: function(xhr, status, error) {
-                                Swal.fire("Error", "No se pudo inactivar el proveedor.", "error");
-                            }
-                        });
-                    }
-                });
-
-            })
-
-        });
+      Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: '{{ $errors->first() }}',
+      });
     </script>
+    @endif
 
 
 
