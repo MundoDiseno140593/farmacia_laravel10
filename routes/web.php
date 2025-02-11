@@ -97,15 +97,11 @@ Route::prefix('proveedor')->group(function () {
 Route::prefix('cliente')->group(function () {
     Route::get('/cliente', [ClienteController::class, 'listaCliente'])->name('listaCliente');
     Route::post('/crear_cliente', [ClienteController::class, 'crear_cliente'])->name('crear_cliente');
-    Route::post('/cambiar_foto_proveedor', [ProveedorController::class, 'cambiar_foto_proveedor'])->name('cambiar_foto_proveedor');
-    Route::get('/proveedor/{id}', [ProveedorController::class, 'extraerDatos'])->name('extraer_datos');
+    Route::post('/cambiar_foto_cliente', [ClienteController::class, 'cambiar_foto_cliente'])->name('cambiar_foto_cliente');
+    Route::get('/cliente/{id}', [ClienteController::class, 'extraer_datos_cliente'])->name('extraer_datos_cliente');
     Route::put('/proveedor/actualizar', [ProveedorController::class, 'actualizar'])->name('actualizar_proveedor');
     Route::post('/proveedor/eliminar_proveedor/{id}', [ProveedorController::class, 'eliminar_proveedor'])->name('eliminar_proveedor');
 });
-
-
-
-
 
 
 
@@ -126,14 +122,3 @@ Route::prefix('admin')->group(function () {
 
     });
 });
-
-
-
-
-
-
-
-
-
-
-

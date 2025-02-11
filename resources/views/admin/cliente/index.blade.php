@@ -91,9 +91,9 @@
                                         <i class="fas fa-image"></i>
                                     </button>
 
-                                    <button class="editar-prov btn btn-sm btn-success" type="button"
+                                    <button class="editar-cli btn btn-sm btn-success" type="button"
                                         data-id="{{ $cli->id }}" data-toggle="modal"
-                                        data-target="#modalEditarcli">
+                                        data-target="#modaleditarcli">
                                         <i class="fas fa-pencil-alt"></i>
                                     </button>
 
@@ -103,8 +103,6 @@
                                 </td>
                             </tr>
                         @endforeach
-
-
                         </tbody>
                     </table>
                 </div>
@@ -224,7 +222,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h5 class="modal-title">Cambiar Foto De cli</h5>
+                    <h5 class="modal-title">Cambiar Foto De Cliente</h5>
                 </div>
                 <div class="modal-body">
                     <div class="text-center">
@@ -235,13 +233,13 @@
                         <b id="nombre_logo"></b>
                     </div>
 
-                    <form action="" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('cambiar_foto_cliente') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="input-group mb-3 ml-5 mt-2">
                             <!-- SE AGREGA ID AL INPUT -->
                             <input type="file" id="photo" name="photo" class="input-group">
                             <input type="hidden" name="funcion" id="funcion">
-                            <input type="hidden" name="id-logo-prov" id="id-logo-prov">
+                            <input type="hidden" name="id-logo-cli" id="id-logo-cli">
                         </div>
                 </div>
 
@@ -254,55 +252,114 @@
     </div>
 
     <!-- Modal editar cli -->
-    <div class="modal fade" id="modalEditarcli">
-        <div class="modal-dialog">
+    <div class="modal fade" id="modaleditarcli">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="card card-success">
                     <div class="card-header">
-                        <h3 class="card-title">Editar cli</h3>
-                        <button data-dismiss="modal" aria-label="close" class="close">
+                        <h3 class="card-title">Editar Clientes</h3>
+                        <button data-bs-dismiss="modal" aria-label="close" class="close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="card-body">
                         <form action="" method="POST">
                             @csrf
-                            @method('PUT')
-                            <div class="form-group">
-                                <label for="nombre">Nombres:</label>
-                                <input id="nombre_edit" name="nombre_edit" type="text" class="form-control"
-                                    placeholder="Ingrese Nombre" required>
+                            <div class="row">
+                                <!-- Columna 1 -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="nombre">Nombres:</label>
+                                        <input id="nombre" name="nombre" type="text" class="form-control"
+                                            placeholder="Ingrese Nombre" required>
+                                    </div>
+                                </div>
+                                <!-- Columna 2 -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="apellidos">Apellidos:</label>
+                                        <input id="apellidos" name="apellidos" type="text" class="form-control"
+                                            placeholder="Ingrese Apellidos" required>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="telefono">Telefono:</label>
-                                <input id="telefono_edit" name="telefono_edit" type="number" class="form-control"
-                                    placeholder="Ingrese Telefono" required>
+                            <div class="row">
+                                <!-- Columna 1 -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="dni">DNI:</label>
+                                        <input id="dni" name="dni" type="number" class="form-control"
+                                            placeholder="Ingrese DNI">
+                                    </div>
+                                </div>
+                                <!-- Columna 2 -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="f_nac">Nacimiento:</label>
+                                        <input id="f_nac" name="f_nac" type="date" class="form-control"
+                                            placeholder="Ingrese Fecha De Nacimiento" required>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="correo">Correo</label>
-                                <input id="correo_edit" name="correo_edit" type="email" class="form-control"
-                                    placeholder="Ingrese Correo">
+                            <div class="row">
+                                <!-- Columna 1 -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="telefono">Telefono:</label>
+                                        <input id="telefono" name="telefono" type="number" class="form-control"
+                                            placeholder="Ingrese Telefono">
+                                    </div>
+                                </div>
+                                <!-- Columna 2 -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="correo">Correo</label>
+                                        <input id="correo" name="correo" type="email" class="form-control"
+                                            placeholder="Ingrese Correo">
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="direccion">Direccion:</label>
-                                <input id="direccion_edit" name="direccion_edit" type="text" class="form-control"
-                                    placeholder="Ingrese Direccion" required>
+                            <div class="row">
+                                <!-- Columna 1 -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="sexo">Sexo:</label>
+                                        <select name="id_sexo" id="id_sexo" class="form-control select2"
+                                            style="width: 100%">
+                                            <option value="">Seleccionar</option>
+                                            @foreach ($sexo as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Columna 2 -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="adicional">Direccion:</label>
+                                        <textarea name="direccion" id="direccion" class="form-control" placeholder="Ingrese su direccion">
+
+                                        </textarea>
+                                    </div>
+                                </div>
                             </div>
 
-                            <input type="hidden" name="id_edit_prov" id="id_edit_prov">
+                            <input type="hidden" name="id_edit_cli" id="id_edit_cli">
 
+                            <div class="card-footer">
+                                <button type="submit"
+                                    class="btn bg-gradient-primary float-right m-1 w-100">Actualizar</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn bg-gradient-primary float-right m-1 w-100">Guardar</button>
-                    </div>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
+
 
 
 
@@ -326,6 +383,74 @@
     </script>
     @endif
 
+    <script>
+        $(document).ready(function() {
+            $('#id_sexo').select2();
+            $('#cliesTable').DataTable();
+
+                  // Detectar cambio en input file y mostrar la imagen seleccionada
+                  $('#photo').change(function(event) {
+                    var file = event.target.files[0]; // Obtener archivo
+                    if (file) {
+                        var reader = new FileReader();
+                        reader.onload = function(e) {
+                            $('#logoactual').attr('src', e.target.result); // Mostrar en modal
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        console.warn("No se seleccionó ningún archivo.");
+                    }
+                });
+
+
+            $('#cliesTable').on('click', '.avatar', function(e) {
+                var id = $(this).data('id');
+                var nombre = $(this).data('nombre');
+                var avatar = $(this).data('avatar');
+
+                // Si el proveedor ya tiene foto, mostrarla; si no, usar la default
+                $('#logoactual').attr('src', avatar || "{{ asset('img/cli.png') }}");
+                $('#nombre_logo').html(nombre);
+                $('#id-logo-cli').val(id);
+
+                $('#cambiologo').modal('show');
+            });
+
+
+              $('#cliesTable').on('click', '.editar-cli', function() {
+                var id = $(this).data('id');
+                $('#id_edit_cli').val(id);
+
+                var url = "{{ route('extraer_datos_cliente', ['id' => ':id']) }}";
+                url = url.replace(':id', id);
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    dataType: "json", // Aseguramos que la respuesta sea JSON
+                    success: function(response) {
+                        console.log(response)
+                        if (response.success) {
+                            var proveedor = response.data;
+                            // Llenar los campos del modal con los datos obtenidos
+                            $('#nombre_edit').val(proveedor.nombre);
+                            $('#correo_edit').val(proveedor.correo);
+                            $('#telefono_edit').val(proveedor.telefono);
+                            $('#direccion_edit').val(proveedor.direccion);
+                            // Mostrar el modal
+                            $('#modalEditarproveedor').modal('hide');
+                        } else {
+                            alert("No se encontraron datos del proveedor.");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error en la petición AJAX:", error);
+                    }
+                });
+            });
+            
+        });
+    </script>
 
 
 @endsection

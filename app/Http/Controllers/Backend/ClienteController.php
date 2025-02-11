@@ -55,5 +55,31 @@ class ClienteController extends Controller
         }
     }
 
+    public function cambiar_foto_cliente(Request $request)
+    {
+        // Validar el archivo de imagen
+        $request->validate([
+            'photo' => 'required|image|mimes:jpg,png,jpeg|max:2048',
+        ]);
+
+        // Obtener el id del cliente desde el campo oculto
+        $id = $request->input('id-logo-cli');
+        $cliente = Cliente::findOrFail($id);
+
+        if ($request->hasFile('photo')) {
+            // Subir la nueva foto
+            $path = $request->file('photo')->store('public/proveedor');
+
+            // Convertir el path a una URL accesible
+            $path = str_replace('public/', 'storage/', $path);
+
+            // Actualizar el avatar del cliente
+            $cliente->avatar = $path;
+            $cliente->save();
+        }
+
+        // Redirigir con un mensaje de éxito
+        return redirect()->back()->with('success', 'Foto actualizada correctamente');
+    }
 
 }
