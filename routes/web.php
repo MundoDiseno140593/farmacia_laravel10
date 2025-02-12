@@ -99,8 +99,8 @@ Route::prefix('cliente')->group(function () {
     Route::post('/crear_cliente', [ClienteController::class, 'crear_cliente'])->name('crear_cliente');
     Route::post('/cambiar_foto_cliente', [ClienteController::class, 'cambiar_foto_cliente'])->name('cambiar_foto_cliente');
     Route::get('/cliente/{id}', [ClienteController::class, 'extraer_datos_cliente'])->name('extraer_datos_cliente');
-    Route::put('/proveedor/actualizar', [ProveedorController::class, 'actualizar'])->name('actualizar_proveedor');
-    Route::post('/proveedor/eliminar_proveedor/{id}', [ProveedorController::class, 'eliminar_proveedor'])->name('eliminar_proveedor');
+    Route::put('/actualizar', [ClienteController::class, 'actualizar_cliente'])->name('actualizar_cliente');
+    Route::post('/eliminar_cliente/{id}', [ClienteController::class, 'eliminar_cliente'])->name('eliminar_cliente');
 });
 
 

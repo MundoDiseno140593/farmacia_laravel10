@@ -44,7 +44,7 @@
                                 <th>Nombre</th>
                                 <th style="text-align: center">Teléfono</th>
                                 <th>DNI</th>
-                                <th  style="text-align: center">Fecha Nacimiento</th>
+                                <th style="text-align: center">Fecha Nacimiento</th>
                                 <th>Foto</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
@@ -56,53 +56,60 @@
                             @endphp
 
                             @foreach ($cliente as $cli)
-                            <tr>
-                                <td>{{ $contador++ }}</td>
-                                <td>{{ $cli->nombre }} {{ $cli->apellidos }}</td>
-                                <td style="text-align: center">{{ $cli->telefono }}</td>
-                                <td  style="text-align: center">{{ $cli->dni }}</td>
-                                <td  style="text-align: center">{{ $cli->edad }}</td>
-                                <td>
-                                    @php
-                                        $rutaImagen = public_path($cli->avatar);
-                                    @endphp
+                                <tr>
+                                    <td>{{ $contador++ }}</td>
+                                    <td>{{ $cli->nombre }} {{ $cli->apellidos }}</td>
+                                    <td style="text-align: center">{{ $cli->telefono }}</td>
+                                    <td style="text-align: center">{{ $cli->dni }}</td>
+                                    <td style="text-align: center">{{ $cli->edad }}</td>
+                                    <td>
+                                        @php
+                                            $rutaImagen = public_path($cli->avatar);
+                                        @endphp
 
-                                    @if (file_exists($rutaImagen) && !is_dir($rutaImagen))
-                                        <img src="{{ asset($cli->avatar) }}" class="img-fluid img-circle"
-                                            style="width: 40px; cursor: none;">
-                                    @else
-                                        <img src="{{ asset('img/proveedor.png') }}" class="img-fluid img-circle"
-                                            style="width: 40px; cursor: none;">
-                                    @endif
-                                </td>
+                                        @if (file_exists($rutaImagen) && !is_dir($rutaImagen))
+                                            <img src="{{ asset($cli->avatar) }}" class="img-fluid img-circle"
+                                                style="width: 40px; cursor: none;">
+                                        @else
+                                            <img src="{{ asset('img/cl.png') }}" class="img-fluid img-circle"
+                                                style="width: 40px; cursor: none;">
+                                        @endif
+                                    </td>
 
-                                <td>
-                                    @if ($cli->estado == 'Activo')
-                                        <span class="badge bg-success">Activo</span>
-                                    @else
-                                        <span class="badge bg-danger">Inactivo</span>
-                                    @endif
-                                </td>
+                                    <td>
+                                        @if ($cli->estado == 'Activo')
+                                            <span class="badge bg-success">Activo</span>
+                                        @else
+                                            <span class="badge bg-danger">Inactivo</span>
+                                        @endif
+                                    </td>
 
-                                <td>
-                                    <button type="button" class="avatar btn btn-sm btn-info"
-                                        data-id="{{ $cli->id }}" data-nombre="{{ $cli->nombre }}"
-                                        data-avatar="{{ asset($cli->avatar ?? 'img/cli.png') }}">
-                                        <i class="fas fa-image"></i>
-                                    </button>
+                                    <td>
+                                        <button type="button" class="avatar btn btn-sm btn-info"
+                                            data-id="{{ $cli->id }}" data-nombre="{{ $cli->nombre }}"
+                                            data-avatar="{{ asset($cli->avatar ?? 'img/cli.png') }}">
+                                            <i class="fas fa-image"></i>
+                                        </button>
 
-                                    <button class="editar-cli btn btn-sm btn-success" type="button"
-                                        data-id="{{ $cli->id }}" data-toggle="modal"
-                                        data-target="#modaleditarcli">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </button>
+                                        <button class="editar-cli btn btn-sm btn-success" type="button"
+                                            data-id="{{ $cli->id }}" data-toggle="modal"
+                                            data-target="#modaleditarcli">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </button>
+                                        
+                                        <button class="ver btn btn-sm btn-primary" data-id="{{ $cli->id }}"
+                                            data-nombre="{{ $cli->nombre }}" data-toggle="modal"
+                                            data-target="#modalvercli">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
 
-                                    <button class="borrar btn btn-sm btn-danger"  data-id="{{ $cli->id }}" data-nombre="{{ $cli->nombre }}">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        @endforeach
+                                        <button class="borrar btn btn-sm btn-danger" data-id="{{ $cli->id }}"
+                                            data-nombre="{{ $cli->nombre }}">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -148,7 +155,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="dni">DNI:</label>
-                                        <input id="dni" name="dni" type="number" class="form-control"
+                                        <input id="dni" name="dni" type="text" class="form-control"
                                             placeholder="Ingrese DNI">
                                     </div>
                                 </div>
@@ -263,14 +270,15 @@
                         </button>
                     </div>
                     <div class="card-body">
-                        <form action="" method="POST">
+                        <form action="{{ route('actualizar_cliente') }}" method="POST">
                             @csrf
+                            @method('PUT')
                             <div class="row">
                                 <!-- Columna 1 -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="nombre">Nombres:</label>
-                                        <input id="nombre" name="nombre" type="text" class="form-control"
+                                        <input id="nombre_edit" name="nombre_edit" type="text" class="form-control"
                                             placeholder="Ingrese Nombre" required>
                                     </div>
                                 </div>
@@ -278,8 +286,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="apellidos">Apellidos:</label>
-                                        <input id="apellidos" name="apellidos" type="text" class="form-control"
-                                            placeholder="Ingrese Apellidos" required>
+                                        <input id="apellidos_edit" name="apellidos_edit" type="text"
+                                            class="form-control" placeholder="Ingrese Apellidos" required>
                                     </div>
                                 </div>
                             </div>
@@ -289,7 +297,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="dni">DNI:</label>
-                                        <input id="dni" name="dni" type="number" class="form-control"
+                                        <input id="dni_edit" name="dni_edit" type="text" class="form-control"
                                             placeholder="Ingrese DNI">
                                     </div>
                                 </div>
@@ -297,7 +305,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="f_nac">Nacimiento:</label>
-                                        <input id="f_nac" name="f_nac" type="date" class="form-control"
+                                        <input id="f_nac_edit" name="f_nac_edit" type="date" class="form-control"
                                             placeholder="Ingrese Fecha De Nacimiento" required>
                                     </div>
                                 </div>
@@ -308,15 +316,15 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="telefono">Telefono:</label>
-                                        <input id="telefono" name="telefono" type="number" class="form-control"
-                                            placeholder="Ingrese Telefono">
+                                        <input id="telefono_edit" name="telefono_edit" type="number"
+                                            class="form-control" placeholder="Ingrese Telefono">
                                     </div>
                                 </div>
                                 <!-- Columna 2 -->
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="correo">Correo</label>
-                                        <input id="correo" name="correo" type="email" class="form-control"
+                                        <input id="correo_edit" name="correo_edit" type="email" class="form-control"
                                             placeholder="Ingrese Correo">
                                     </div>
                                 </div>
@@ -327,7 +335,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="sexo">Sexo:</label>
-                                        <select name="id_sexo" id="id_sexo" class="form-control select2"
+                                        <select name="id_sexo_edit" id="id_sexo_edit" class="form-control select2"
                                             style="width: 100%">
                                             <option value="">Seleccionar</option>
                                             @foreach ($sexo as $item)
@@ -340,7 +348,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="adicional">Direccion:</label>
-                                        <textarea name="direccion" id="direccion" class="form-control" placeholder="Ingrese su direccion">
+                                        <textarea name="direccion_edit" id="direccion_edit" class="form-control" placeholder="Ingrese su direccion">
 
                                         </textarea>
                                     </div>
@@ -360,6 +368,105 @@
         </div>
     </div>
 
+    <!-- Modal ver cli -->
+<div class="modal fade" id="modalvercli">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h3 class="card-title">Detalles del Cliente</h3>
+                    <button data-dismiss="modal" aria-label="close" class="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Columna 1 -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nombre">Nombres:</label>
+                                <input id="nombre_view" type="text" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <!-- Columna 2 -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="apellidos">Apellidos:</label>
+                                <input id="apellidos_view" type="text" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Columna 1 -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="dni">DNI:</label>
+                                <input id="dni_view" type="text" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <!-- Columna 2 -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="f_nac">Nacimiento:</label>
+                                <input id="f_nac_view" type="date" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="edad">Edad (Años):</label>
+                            <input id="edad_view" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    
+
+                    <div class="row"
+                        <!-- Columna 1 -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="telefono">Teléfono:</label>
+                                <input id="telefono_view" type="number" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <!-- Columna 2 -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="correo">Correo</label>
+                                <input id="correo_view" type="email" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Columna 1 -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="sexo">Sexo:</label>
+                                <select id="id_sexo_view" class="form-control select2" disabled>
+                                    <option value="">Seleccionar</option>
+                                    @foreach ($sexo as $item)
+                                        <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Columna 2 -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="direccion">Dirección:</label>
+                                <textarea id="direccion_view" class="form-control" readonly></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="id_view_cli">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 
@@ -374,33 +481,35 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     @if ($errors->any())
-    <script>
-      Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: '{{ $errors->first() }}',
-      });
-    </script>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '{{ $errors->first() }}',
+            });
+        </script>
     @endif
 
     <script>
         $(document).ready(function() {
             $('#id_sexo').select2();
+            $('#id_sexo_edit').select2()
+
             $('#cliesTable').DataTable();
 
-                  // Detectar cambio en input file y mostrar la imagen seleccionada
-                  $('#photo').change(function(event) {
-                    var file = event.target.files[0]; // Obtener archivo
-                    if (file) {
-                        var reader = new FileReader();
-                        reader.onload = function(e) {
-                            $('#logoactual').attr('src', e.target.result); // Mostrar en modal
-                        };
-                        reader.readAsDataURL(file);
-                    } else {
-                        console.warn("No se seleccionó ningún archivo.");
-                    }
-                });
+            // Detectar cambio en input file y mostrar la imagen seleccionada
+            $('#photo').change(function(event) {
+                var file = event.target.files[0]; // Obtener archivo
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#logoactual').attr('src', e.target.result); // Mostrar en modal
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    console.warn("No se seleccionó ningún archivo.");
+                }
+            });
 
 
             $('#cliesTable').on('click', '.avatar', function(e) {
@@ -408,7 +517,7 @@
                 var nombre = $(this).data('nombre');
                 var avatar = $(this).data('avatar');
 
-                // Si el proveedor ya tiene foto, mostrarla; si no, usar la default
+                // Si el cl ya tiene foto, mostrarla; si no, usar la default
                 $('#logoactual').attr('src', avatar || "{{ asset('img/cli.png') }}");
                 $('#nombre_logo').html(nombre);
                 $('#id-logo-cli').val(id);
@@ -417,7 +526,7 @@
             });
 
 
-              $('#cliesTable').on('click', '.editar-cli', function() {
+            $('#cliesTable').on('click', '.editar-cli', function() {
                 var id = $(this).data('id');
                 $('#id_edit_cli').val(id);
 
@@ -431,16 +540,20 @@
                     success: function(response) {
                         console.log(response)
                         if (response.success) {
-                            var proveedor = response.data;
+                            var cl = response.data;
                             // Llenar los campos del modal con los datos obtenidos
-                            $('#nombre_edit').val(proveedor.nombre);
-                            $('#correo_edit').val(proveedor.correo);
-                            $('#telefono_edit').val(proveedor.telefono);
-                            $('#direccion_edit').val(proveedor.direccion);
+                            $('#nombre_edit').val(cl.nombre);
+                            $('#apellidos_edit').val(cl.apellidos);
+                            $('#correo_edit').val(cl.correo);
+                            $('#telefono_edit').val(cl.telefono);
+                            $('#direccion_edit').val(cl.direccion);
+                            $('#dni_edit').val(cl.dni);
+                            $('#f_nac_edit').val(cl.edad);
+                            $('#id_sexo_edit').val(cl.sexo_id).change();
                             // Mostrar el modal
-                            $('#modalEditarproveedor').modal('hide');
+                            $('#modalEditarcl').modal('hide');
                         } else {
-                            alert("No se encontraron datos del proveedor.");
+                            alert("No se encontraron datos del cl.");
                         }
                     },
                     error: function(xhr, status, error) {
@@ -448,7 +561,87 @@
                     }
                 });
             });
-            
+
+
+            $('#cliesTable').on('click','.borrar', function(){
+                var id = $(this).data('id');
+                var nombre = $(this).data('nombre');
+
+                var url = "{{ route('eliminar_cliente',['id'=>':id']) }}";
+                url = url.replace(':id', id);
+
+                Swal.fire({
+                    title: "¿Estás seguro?",
+                    text: "Se eliminará el cliente: " + nombre,
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "Sí, eliminar",
+                    cancelButtonText: "Cancelar"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: url,
+                            type: "POST",
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    Swal.fire("¡Inactivado!", response.message, "success")
+                                        .then(() => {
+                                            location.reload(); // Recargar la página o actualizar la tabla
+                                        });
+                                } else {
+                                    Swal.fire("Error", response.message, "error");
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                Swal.fire("Error", "No se pudo inactivar el cliente.", "error");
+                            }
+                        });
+                    }
+                });
+
+            })
+        
+            $('#cliesTable').on('click', '.ver', function() {
+                var id = $(this).data('id');
+                $('#id_edit_cli').val(id);
+
+                var url = "{{ route('extraer_datos_cliente', ['id' => ':id']) }}";
+                url = url.replace(':id', id);
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    dataType: "json", // Aseguramos que la respuesta sea JSON
+                    success: function(response) {
+                        console.log(response)
+                        if (response.success) {
+                            var cl = response.data;
+                            // Llenar los campos del modal con los datos obtenidos
+                            $('#nombre_view').val(cl.nombre);
+                            $('#apellidos_view').val(cl.apellidos);
+                            $('#correo_view').val(cl.correo);
+                            $('#telefono_view').val(cl.telefono);
+                            $('#direccion_view').val(cl.direccion);
+                            $('#dni_view').val(cl.dni);
+                            $('#f_nac_view').val(cl.edad);
+                            $('#edad_view').val(response.edad_fecha);
+                            $('#id_sexo_view').val(cl.sexo_id).change();
+                            // Mostrar el modal
+                            $('#modalEditarcl').modal('hide');
+                        } else {
+                            alert("No se encontraron datos del cl.");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error en la petición AJAX:", error);
+                    }
+                });
+            });
         });
     </script>
 
