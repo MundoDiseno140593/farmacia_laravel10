@@ -96,7 +96,7 @@
                                             data-target="#modaleditarcli">
                                             <i class="fas fa-pencil-alt"></i>
                                         </button>
-                                        
+
                                         <button class="ver btn btn-sm btn-primary" data-id="{{ $cli->id }}"
                                             data-nombre="{{ $cli->nombre }}" data-toggle="modal"
                                             data-target="#modalvercli">
@@ -369,103 +369,102 @@
     </div>
 
     <!-- Modal ver cli -->
-<div class="modal fade" id="modalvercli">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="card card-info">
-                <div class="card-header">
-                    <h3 class="card-title">Detalles del Cliente</h3>
-                    <button data-dismiss="modal" aria-label="close" class="close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <!-- Columna 1 -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="nombre">Nombres:</label>
-                                <input id="nombre_view" type="text" class="form-control" readonly>
-                            </div>
-                        </div>
-                        <!-- Columna 2 -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="apellidos">Apellidos:</label>
-                                <input id="apellidos_view" type="text" class="form-control" readonly>
-                            </div>
-                        </div>
+    <div class="modal fade" id="modalvercli">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Detalles del Cliente</h3>
+                        <button data-dismiss="modal" aria-label="close" class="close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Columna 1 -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="nombre">Nombres:</label>
+                                    <input id="nombre_view" type="text" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <!-- Columna 2 -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="apellidos">Apellidos:</label>
+                                    <input id="apellidos_view" type="text" class="form-control" readonly>
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="row">
-                        <!-- Columna 1 -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="dni">DNI:</label>
-                                <input id="dni_view" type="text" class="form-control" readonly>
+                        <div class="row">
+                            <!-- Columna 1 -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="dni">DNI:</label>
+                                    <input id="dni_view" type="text" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <!-- Columna 2 -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="f_nac">Nacimiento:</label>
+                                    <input id="f_nac_view" type="date" class="form-control" readonly>
+                                </div>
                             </div>
                         </div>
-                        <!-- Columna 2 -->
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label for="f_nac">Nacimiento:</label>
-                                <input id="f_nac_view" type="date" class="form-control" readonly>
+                                <label for="edad">Edad (Años):</label>
+                                <input id="edad_view" type="text" class="form-control" readonly>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="edad">Edad (Años):</label>
-                            <input id="edad_view" type="text" class="form-control" readonly>
-                        </div>
-                    </div>
-                    
 
-                    <div class="row"
-                        <!-- Columna 1 -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="telefono">Teléfono:</label>
-                                <input id="telefono_view" type="number" class="form-control" readonly>
-                            </div>
-                        </div>
-                        <!-- Columna 2 -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="correo">Correo</label>
-                                <input id="correo_view" type="email" class="form-control" readonly>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <!-- Columna 1 -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="sexo">Sexo:</label>
-                                <select id="id_sexo_view" class="form-control select2" disabled>
-                                    <option value="">Seleccionar</option>
-                                    @foreach ($sexo as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nombre }}</option>
-                                    @endforeach
-                                </select>
+                        <div class="row" <!-- Columna 1 -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="telefono">Teléfono:</label>
+                                    <input id="telefono_view" type="number" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <!-- Columna 2 -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="correo">Correo</label>
+                                    <input id="correo_view" type="email" class="form-control" readonly>
+                                </div>
                             </div>
                         </div>
-                        <!-- Columna 2 -->
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="direccion">Dirección:</label>
-                                <textarea id="direccion_view" class="form-control" readonly></textarea>
-                            </div>
-                        </div>
-                    </div>
 
-                    <input type="hidden" id="id_view_cli">
+                        <div class="row">
+                            <!-- Columna 1 -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="sexo">Sexo:</label>
+                                    <select id="id_sexo_view" class="form-control select2" disabled>
+                                        <option value="">Seleccionar</option>
+                                        @foreach ($sexo as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Columna 2 -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="direccion">Dirección:</label>
+                                    <textarea id="direccion_view" class="form-control" readonly></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="id_view_cli">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
@@ -563,11 +562,11 @@
             });
 
 
-            $('#cliesTable').on('click','.borrar', function(){
+            $('#cliesTable').on('click', '.borrar', function() {
                 var id = $(this).data('id');
                 var nombre = $(this).data('nombre');
 
-                var url = "{{ route('eliminar_cliente',['id'=>':id']) }}";
+                var url = "{{ route('eliminar_cliente', ['id' => ':id']) }}";
                 url = url.replace(':id', id);
 
                 Swal.fire({
@@ -589,23 +588,26 @@
                             },
                             success: function(response) {
                                 if (response.success) {
-                                    Swal.fire("¡Inactivado!", response.message, "success")
+                                    Swal.fire("¡Inactivado!", response.message,
+                                            "success")
                                         .then(() => {
-                                            location.reload(); // Recargar la página o actualizar la tabla
+                                            location
+                                        .reload(); // Recargar la página o actualizar la tabla
                                         });
                                 } else {
                                     Swal.fire("Error", response.message, "error");
                                 }
                             },
                             error: function(xhr, status, error) {
-                                Swal.fire("Error", "No se pudo inactivar el cliente.", "error");
+                                Swal.fire("Error", "No se pudo inactivar el cliente.",
+                                    "error");
                             }
                         });
                     }
                 });
 
             })
-        
+
             $('#cliesTable').on('click', '.ver', function() {
                 var id = $(this).data('id');
                 $('#id_edit_cli').val(id);
