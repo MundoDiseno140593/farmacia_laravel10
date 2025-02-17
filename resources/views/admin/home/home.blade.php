@@ -1,5 +1,5 @@
 @extends('Layouts.pantilla')
-@section('title', 'Dashboard | Inevt')
+@section('title', 'Dashboard')
 
 @section('contenido')
 

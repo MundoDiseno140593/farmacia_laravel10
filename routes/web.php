@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\AtributoController;
 use App\Http\Controllers\Backend\ClienteController;
+use App\Http\Controllers\Backend\CompraController;
 use App\Http\Controllers\Backend\ProductoController;
 use App\Http\Controllers\Backend\ProveedorController;
 use App\Http\Controllers\Backend\UsuarioController;
@@ -104,6 +105,15 @@ Route::prefix('cliente')->group(function () {
 });
 
 
+Route::prefix('compra')->group(function () {
+    Route::get('/Compra', [CompraController::class, 'vista_compra'])->name('vista_compra');
+    Route::get('/Compra/llenar', [CompraController::class, 'llenar_producto'])->name('llenar_producto');
+    Route::get('/Compra/estados', [CompraController::class, 'rellenar_estados'])->name('rellenar_estados');
+    Route::get('/Compra/proveedor', [CompraController::class, 'rellenar_proveedores'])->name('rellenar_proveedores');
+    Route::post('/Compra/crear', [CompraController::class, 'crear_compra'])->name('crear_compra');
+    Route::get('extraer_lote_compra/{id}', [CompraController::class, 'extraer_lote_compra'])->name('extraer_lote_compra');
+    Route::get('extraer_estados/{id}', [CompraController::class, 'extraer_estados'])->name('extraer_estados');
+});
 
 
 

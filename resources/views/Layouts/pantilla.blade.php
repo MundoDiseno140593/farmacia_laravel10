@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>@yield('title')</title>
+<title>@yield('title') | Farmacia</title>
 
 @yield('css')
 <link rel="shortcut icon" href="{{ asset('img/HECRH.png') }}" type="image/x-icon" />
@@ -253,6 +253,26 @@
                                     <a href="{{ route('vistaproveedor') }}" class="nav-link">
                                         <i class="fas fa-truck-moving  nav-icon"></i>
                                         <p>Gestion Proveedor</p>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </li>
+
+                        <li class="nav-item ">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-store-alt"></i>
+                                <p>
+                                    Compra producto
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('vista_compra') }}" class="nav-link">
+                                        <i class="fas fa-truck-moving  nav-icon"></i>
+                                        <p>Gestion Compra</p>
                                     </a>
                                 </li>
                             </ul>

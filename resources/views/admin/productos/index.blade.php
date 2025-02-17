@@ -1,5 +1,5 @@
 @extends('Layouts.pantilla')
-@section('title', 'Productos | Inevt')
+@section('title', 'Productos')
 
 @section('css')
     <!-- Bootstrap CSS -->

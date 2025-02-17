@@ -35,4 +35,11 @@ class Producto extends Model
     {
         return $this->belongsTo(Presentacion::class, 'id_present');
     }
+
+    public function lotes()
+    {
+        return $this->hasMany(Lote::class, 'id_producto'); // Relación inversa con los lotes
+    }
+
+
 }
