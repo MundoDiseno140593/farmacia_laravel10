@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 06-02-2025 a las 01:31:41
+-- Servidor: localhost:3306
+-- Tiempo de generación: 20-02-2025 a las 01:02:51
 -- Versión del servidor: 8.0.30
--- Versión de PHP: 8.1.10
+-- Versión de PHP: 8.1.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,16 +31,51 @@ CREATE TABLE `clientes` (
   `id` bigint UNSIGNED NOT NULL,
   `nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `apellidos` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dni` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dni` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `edad` date NOT NULL,
   `telefono` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `correo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sexo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `direccion` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `sexo_id` bigint UNSIGNED DEFAULT NULL
+  `sexo_id` bigint UNSIGNED NOT NULL,
+  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `estado` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Activo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`id`, `nombre`, `apellidos`, `dni`, `edad`, `telefono`, `correo`, `direccion`, `created_at`, `updated_at`, `sexo_id`, `avatar`, `estado`) VALUES
+(1, 'Elvis Jose', 'Pavón Zeas', '046140593000H', '1993-05-14', '86479297', 'qemesulocu@mailinator.com', 'Carazo\r\nCarazo', '2025-02-07 23:47:41', '2025-02-12 00:13:33', 1, 'storage/proveedor/QWxaGFFgNpsSADaQQTD2Qg99dF0hGlQozBve0vTv.jpg', 'Activo'),
+(2, 'Dolorem aspernatur b', 'Dicta omnis ut ad au', '54', '2002-03-02', '52', 'nyludu@mailinator.com', 'Maiores molestiae au', '2025-02-08 00:02:03', '2025-02-12 00:17:28', 2, 'storage/proveedor/Azi4BeqsMBDEYEsr8p9YAze558bmkI21W24sDoXp.jpg', 'Activo');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `compras`
+--
+
+CREATE TABLE `compras` (
+  `id` int NOT NULL,
+  `codigo` varchar(100) NOT NULL,
+  `fecha_compra` date NOT NULL,
+  `fecha_entrega` date NOT NULL,
+  `total` float NOT NULL,
+  `id_estado_pago` int NOT NULL,
+  `id_proveedor` int NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Volcado de datos para la tabla `compras`
+--
+
+INSERT INTO `compras` (`id`, `codigo`, `fecha_compra`, `fecha_entrega`, `total`, `id_estado_pago`, `id_proveedor`, `updated_at`, `created_at`) VALUES
+(5, '0120', '2002-01-20', '2025-07-01', 35, 1, 1, '2025-02-15 19:38:36', '2025-02-16 01:38:36'),
+(6, '852445', '2020-12-22', '1973-12-25', 64, 2, 1, '2025-02-15 19:43:09', '2025-02-16 01:43:09');
 
 -- --------------------------------------------------------
 
@@ -57,6 +92,25 @@ CREATE TABLE `detalle_venta` (
   `lote_id_prov` int NOT NULL,
   `id_det_venta` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estado_pago`
+--
+
+CREATE TABLE `estado_pago` (
+  `id` int NOT NULL,
+  `nombre` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Volcado de datos para la tabla `estado_pago`
+--
+
+INSERT INTO `estado_pago` (`id`, `nombre`) VALUES
+(1, 'Cancelado'),
+(2, 'No Cancelado');
 
 -- --------------------------------------------------------
 
@@ -97,12 +151,26 @@ INSERT INTO `laboratorios` (`id`, `nombre`, `foto`, `estado`, `updated_at`, `cre
 
 CREATE TABLE `lote` (
   `id` int NOT NULL,
-  `stock` int NOT NULL,
+  `codigo` varchar(100) NOT NULL,
+  `cantidad` int NOT NULL,
   `vencimiento` date NOT NULL,
-  `id_prod` int NOT NULL,
-  `id_prov` int NOT NULL,
-  `estado` varchar(255) DEFAULT 'Activo'
+  `precio_compra` int NOT NULL,
+  `id_compra` int NOT NULL,
+  `id_producto` int NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Volcado de datos para la tabla `lote`
+--
+
+INSERT INTO `lote` (`id`, `codigo`, `cantidad`, `vencimiento`, `precio_compra`, `id_compra`, `id_producto`, `updated_at`, `created_at`) VALUES
+(2, 'Cum qui voluptas eni', 69, '2001-05-13', 41, 5, 11, '2025-02-15 19:38:36', '2025-02-16 01:38:36'),
+(3, 'Rerum tempor quo iur', 90, '1984-01-28', 50, 5, 10, '2025-02-15 19:38:36', '2025-02-16 01:38:36'),
+(4, 'Porro duis corporis ', 57, '1997-03-11', 36, 6, 14, '2025-02-15 19:43:09', '2025-02-16 01:43:09'),
+(5, 'Temporibus veritatis', 47, '2010-03-09', 90, 6, 11, '2025-02-15 19:43:09', '2025-02-16 01:43:09'),
+(6, 'Mollit aut repellend', 83, '1997-11-22', 99, 6, 13, '2025-02-15 19:43:09', '2025-02-16 01:43:09');
 
 -- --------------------------------------------------------
 
@@ -346,11 +414,25 @@ ALTER TABLE `clientes`
   ADD KEY `sexo_id` (`sexo_id`);
 
 --
+-- Indices de la tabla `compras`
+--
+ALTER TABLE `compras`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_estado_pago` (`id_estado_pago`,`id_proveedor`),
+  ADD KEY `id_proveedor` (`id_proveedor`);
+
+--
 -- Indices de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_det_venta` (`id_det_venta`);
+
+--
+-- Indices de la tabla `estado_pago`
+--
+ALTER TABLE `estado_pago`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `laboratorios`
@@ -363,8 +445,8 @@ ALTER TABLE `laboratorios`
 --
 ALTER TABLE `lote`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_prod` (`id_prod`,`id_prov`),
-  ADD KEY `id_prov` (`id_prov`);
+  ADD KEY `id_compra` (`id_compra`,`id_producto`),
+  ADD KEY `id_producto` (`id_producto`);
 
 --
 -- Indices de la tabla `migrations`
@@ -442,13 +524,25 @@ ALTER TABLE `venta_producto`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `compras`
+--
+ALTER TABLE `compras`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `estado_pago`
+--
+ALTER TABLE `estado_pago`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `laboratorios`
@@ -460,7 +554,7 @@ ALTER TABLE `laboratorios`
 -- AUTO_INCREMENT de la tabla `lote`
 --
 ALTER TABLE `lote`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
@@ -533,6 +627,13 @@ ALTER TABLE `clientes`
   ADD CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`sexo_id`) REFERENCES `sexos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
+-- Filtros para la tabla `compras`
+--
+ALTER TABLE `compras`
+  ADD CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedores` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `compras_ibfk_2` FOREIGN KEY (`id_estado_pago`) REFERENCES `estado_pago` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
 -- Filtros para la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
@@ -542,8 +643,8 @@ ALTER TABLE `detalle_venta`
 -- Filtros para la tabla `lote`
 --
 ALTER TABLE `lote`
-  ADD CONSTRAINT `lote_ibfk_1` FOREIGN KEY (`id_prod`) REFERENCES `productos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `lote_ibfk_2` FOREIGN KEY (`id_prov`) REFERENCES `proveedores` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `lote_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `lote_ibfk_2` FOREIGN KEY (`id_compra`) REFERENCES `compras` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Filtros para la tabla `productos`

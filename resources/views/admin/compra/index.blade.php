@@ -306,7 +306,7 @@
         </div>
     </div>
 
-    <!-- Modal crear estado -->
+    <!-- Modal cambiar  estado -->
     <div class="modal fade" id="cambiarestado">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -315,7 +315,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="">
+                    <form action="" method="POST">
+                        @csrf
                         <div class="form-group">
                             <label for="estado">Seleccionar Estado:</label>
                             <select class="form-control" id="estado_edit" name="estado_edit" style="width: 100%">
@@ -325,11 +326,11 @@
                                 @endforeach
                             </select>
                         </div>
-                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary w-100">Save changes</button>
+                    <button type="submit" class="btn btn-primary w-100">Actualizar estado</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -751,7 +752,7 @@
             $('#listarcompras').on('click', '.editar', function() {
                 var id = $(this).data('id');
 
-                var url ="{{ route('extraer_estados',['id'=>':id']) }}";
+                var url = "{{ route('extraer_estados', ['id' => ':id']) }}";
                 url = url.replace(':id', id);
 
                 // Petición AJAX a Laravel para obtener los datos de la compra
@@ -761,7 +762,8 @@
                     success: function(response) {
                         console.log(response)
                         if (response.success) {
-                            $('#estado_edit').val(response.estado).change(); // Mostrar estado en el modal
+                            $('#estado_edit').val(response.estado)
+                        .change(); // Mostrar estado en el modal
                         } else {
                             alert('Error al obtener la información');
                         }
