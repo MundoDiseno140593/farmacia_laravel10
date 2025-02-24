@@ -81,18 +81,22 @@
                                     </td>
 
                                     <td style="text-align:center">{{ $compra->proveedor }}</td>
+
                                     <td style="text-align:center">
-                                        <button class="imprimir btn btn-secondary" data-id="{{ $compra->id }}"><i
-                                                class="fas fa-print"></i>
+                                        <button class="imprimir btn btn-secondary" data-id="{{ $compra->id }}">
+                                            <i class="fas fa-print"></i>
                                         </button>
 
-                                        <button class="ver  btn btn-primary" data-id="{{ $compra->id }}" type="button"
-                                            data-toggle="modal" data-bs-target="#vistacompra"><i class="fas fa-eye"></i>
+                                        <button class="ver btn btn-primary" data-id="{{ $compra->id }}" type="button"
+                                            data-toggle="modal" data-bs-target="#vistacompra">
+                                            <i class="fas fa-eye"></i>
                                         </button>
 
+                                        {{-- Si el estado es "Cancelado", el botón se deshabilita --}}
                                         <button class="editar btn btn-info" type="button" data-id="{{ $compra->id }}"
-                                            data-bs-toggle="modal" data-bs-target="#cambiarestado"><i
-                                                class="fas fa-pencil-alt"></i>
+                                            data-bs-toggle="modal" data-bs-target="#cambiarestado"
+                                            {{ $compra->estado == 'Cancelado' ? 'disabled' : '' }}>
+                                            <i class="fas fa-pencil-alt"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -315,7 +319,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST">
+                    <form action="{{ route('cambiarEstado') }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="estado">Seleccionar Estado:</label>
@@ -326,6 +330,7 @@
                                 @endforeach
                             </select>
                         </div>
+                        <input type="hidden" name="id" id="id">
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary w-100">Actualizar estado</button>
@@ -475,9 +480,6 @@
                     }
                 });
             }
-
-
-
 
             $(document).on('click', '.agregar-producto', (e) => {
                 // Asignar las variables de los campos del formulario
@@ -751,6 +753,7 @@
 
             $('#listarcompras').on('click', '.editar', function() {
                 var id = $(this).data('id');
+                $('#id').val(id);
 
                 var url = "{{ route('extraer_estados', ['id' => ':id']) }}";
                 url = url.replace(':id', id);
@@ -763,7 +766,7 @@
                         console.log(response)
                         if (response.success) {
                             $('#estado_edit').val(response.estado)
-                        .change(); // Mostrar estado en el modal
+                                .change(); // Mostrar estado en el modal
                         } else {
                             alert('Error al obtener la información');
                         }
@@ -772,6 +775,17 @@
                         alert('Error en la conexión con el servidor');
                     }
                 });
+
+            });
+
+            $('#listarcompras').on('click', '.imprimir', function(){
+                var id = $(this).data('id');
+
+
+                 var url = "{{ route('imprimir_compra', ['id' => ':id']) }}";
+                 url = url.replace(':id', id);
+
+                 window.open(url, '_blank'); // Abrir la impresión en una nueva ventana
 
             });
 

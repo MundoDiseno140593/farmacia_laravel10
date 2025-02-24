@@ -113,6 +113,8 @@ Route::prefix('compra')->group(function () {
     Route::post('/Compra/crear', [CompraController::class, 'crear_compra'])->name('crear_compra');
     Route::get('extraer_lote_compra/{id}', [CompraController::class, 'extraer_lote_compra'])->name('extraer_lote_compra');
     Route::get('extraer_estados/{id}', [CompraController::class, 'extraer_estados'])->name('extraer_estados');
+    Route::post('cambiarEstado', [CompraController::class, 'cambiarEstado'])->name('cambiarEstado');
+    Route::post('imprimir_compra/{id}', [CompraController::class, 'imprimir_compra'])->name('imprimir_compra');
 });
 
 

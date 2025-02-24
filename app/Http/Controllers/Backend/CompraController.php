@@ -193,6 +193,48 @@ class CompraController extends Controller
         }
     }
 
+    public function cambiarEstado(Request $request)
+    {
+        // ✅ Paso 1: Validar los datos recibidos del formulario
+        // Se asegura de que el campo 'estado_edit' esté presente y no esté vacío.
+        // Esto evita errores si el usuario envía el formulario sin seleccionar un estado.
+        $request->validate([
+            'estado_edit' => 'required', // Se podría agregar 'exists:estados,id' para validar si existe en la BD.
+        ]);
+
+        // ✅ Paso 2: Buscar el registro en la base de datos
+        // Se busca en la tabla `compras` el registro cuyo `id` coincida con el que se envió desde el formulario.
+        // Esto es clave porque solo podemos actualizar el estado de un registro existente.
+        $registro = compra::find($request->id);
+
+        // ✅ Paso 3: Verificar si el registro existe
+        // Si no se encuentra el registro en la base de datos, se devuelve un mensaje de error
+        // y se redirige a la misma página sin realizar cambios.
+        if (!$registro) {
+            return back()->with('error', 'Registro no encontrado.');
+        }
+
+        // ✅ Paso 4: Actualizar el estado del registro
+        // Se asigna el nuevo estado seleccionado en el formulario al campo `id_estado_pago`
+        // que representa el estado de la compra en la base de datos.
+        $registro->id_estado_pago = $request->estado_edit;
+
+        // ✅ Paso 5: Guardar los cambios en la base de datos
+        // Luego de modificar el estado, se guarda el registro actualizado.
+        $registro->save();
+
+        // ✅ Paso 6: Redirigir con un mensaje de éxito
+        // Si todo el proceso se ejecutó correctamente, se redirige de nuevo a la página anterior
+        // con un mensaje de éxito que indica que el estado fue actualizado correctamente.
+        return back()->with('success', 'Estado actualizado correctamente.');
+    }
+
+    public function imprimir_compra($id)
+    {
+          // ✅ Buscar la compra con sus detalles y proveedor
+    $compra = Compra::with(['detalles.producto', 'proveedor'])->findOrFail($id);
+
+    }
 
 
 }
